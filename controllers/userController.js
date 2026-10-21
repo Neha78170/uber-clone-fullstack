@@ -1,15 +1,7 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import generateToken from "../utils/generateToken.js";
 
-// 🔑 JWT token create karne ke liye function 
-const generateToken = (userId) => {
-    return jwt.sign(
-        { id: userId },
-        process.env.JWT_SECRET || "your_fallback_secret_key", // fallback backup text
-        { expiresIn: "30d" }
-    );
-}
 
 // 📝 Register user
 const registerUser = async (req, res) => {
