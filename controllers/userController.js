@@ -70,7 +70,7 @@ const login = async (req, res) => {
             });
         }
 
-        // 3. ✅ FIX: Direct bcryptuse karke password match karein
+        // 3.  FIX: Direct bcryptuse karke password match karein
         const isPasswordCorrect = await bcrypt.compare(password, existUser.password);
 
         if (!isPasswordCorrect) {
@@ -79,7 +79,7 @@ const login = async (req, res) => {
             });
         }
 
-        // 4. ✅ FIX: Aapke upar banaye gaye generateToken function ka use karein
+        // 4.  FIX: Aapke upar banaye gaye generateToken function ka use karein
         const token = generateToken(existUser._id);
 
         // 5. Successful Response bhejein
@@ -90,7 +90,7 @@ const login = async (req, res) => {
                 name: existUser.name,
                 email: existUser.email
             },
-            token
+            token,
         });
 
     } catch (error) {

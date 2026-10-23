@@ -47,7 +47,7 @@ const captainSchema = new mongoose.Schema({
     capacity: {
         type: Number,
         required: true, // Fixed spelling
-        unique: true    // Fixed spelling from uniqued
+  
         // Removed uppercase and trim because capacity is a Number
     },
     vehicleType: {

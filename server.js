@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/userRoutes.js"
 import  connectDB from "./config/db.js";
-import registerCaptain from "./controllers/captain.controller.js";
+import captainRoutes from "./routes/captain.routes.js";
 
 
 const app = express();
@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
-app.use("/api/captains", registerCaptain);
+app.use("/api/captains", captainRoutes);
 
 connectDB();
 
