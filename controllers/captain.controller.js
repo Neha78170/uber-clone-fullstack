@@ -284,7 +284,59 @@ const updateCaptain = async (req, res) => {
     }
 };
 
+// captain status online and offline 
 
+const updateCaptianAvailability = async (req, res) => {
+    try {
+        const { status } = req.body;
+
+        // Validate status
+        if (!["active", "inactive"].includes(status)) {
+            return res.status(400).json({
+                success: false,
+                message: "Status must be active or inactive"
+            });
+        }
+
+        // Find captain and update status
+        const captain = await Captain.findByIdAndUpdate(
+            req.captainId,
+            {
+                $set: { status }
+            },
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        // Check if captain exists
+        if (!captain) {
+            return res.status(404).json({
+                success: false,
+                message: "Captain not found"
+            });
+        }
+
+        // Send success response
+        return res.status(200).json({
+            success: true,
+            message: status === "active"
+                ? "Captain is now online"
+                : "Captain is now offline",
+            captain
+        });
+
+    } catch (error) {
+        console.error("Availability error:", error.message);
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        });
+    }
+};
+ 
 // ================= EXPORTS =================
 
-export { login, registerCaptain, getCaptainProfile, updateCaptain  };
+export { login, registerCaptain, getCaptainProfile, updateCaptain, updateCaptianAvailability  };
